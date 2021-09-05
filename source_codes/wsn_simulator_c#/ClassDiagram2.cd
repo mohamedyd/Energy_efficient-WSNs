@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Wireless_Sensor_Network_Simulator.DetectTemperatureEventArgs" Collapsed="true">
+    <Position X="7.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAEAAA=</HashCode>
+      <FileName>DetectTemperatureEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Wireless_Sensor_Network_Simulator.WirelessSensorNetworkSimulator" Collapsed="true">
+    <Position X="5.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>8QQAQCUQCKEBFBBCSgmAAEQCCAAKgAgABCAQRAAIQAQ=</HashCode>
+      <FileName>Wireless Sensor Network Simulator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Wireless_Sensor_Network_Simulator.WirelessSensorNetworkTest" Collapsed="true">
+    <Position X="2.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAQAAAASAACAAAAgCAAIACAAAAAEAABAAAAAAIAAA=</HashCode>
+      <FileName>Wireless Sensor Network Test.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Wireless_Sensor_Network_Simulator.WirelessSensorNetwork" Collapsed="true">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>OQoEECAAAZwABACCGgBAQACkgQAQAACAiAIhABEEACA=</HashCode>
+      <FileName>Wireless Sensor Network.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Wireless_Sensor_Network_Simulator.WirelessSensor">
+    <Position X="3.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BIAAAAAAAACIABBAAQAAAAAAAAAAAAAACgRgABAkAAA=</HashCode>
+      <FileName>Wireless Sensor Network.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Wireless_Sensor_Network_Simulator.WirelessSensorConnection" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAEAAAAAAAAAAAAEBBAAAAEAAAAQAAAAAAAJAAAAAA=</HashCode>
+      <FileName>Wireless Sensor Network.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Wireless_Sensor_Network_Simulator.VectorList" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Wireless Sensor Network.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Wireless_Sensor_Network_Simulator.Vector" Collapsed="true">
+    <Position X="0.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAABgAAAABAA=</HashCode>
+      <FileName>Wireless Sensor Network.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Wireless_Sensor_Network_Simulator.Packet" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAARgAAAAAAA=</HashCode>
+      <FileName>Wireless Sensor Network.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Wireless_Sensor_Network_Simulator.probe" Collapsed="true">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAgAAAAAAAhAAAIBAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Wireless Sensor Network.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

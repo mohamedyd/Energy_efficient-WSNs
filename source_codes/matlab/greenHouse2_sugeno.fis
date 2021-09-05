@@ -1,0 +1,62 @@
+[System]
+Name='greenHouse2_sugeno'
+Type='sugeno'
+Version=2.0
+NumInputs=5
+NumOutputs=1
+NumRules=0
+AndMethod='prod'
+OrMethod='probor'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='wtaver'
+
+[Input1]
+Name='temperature'
+Range=[0 1]
+NumMFs=3
+MF1='cool':'trimf',[-0.4 0 0.4]
+MF2='warm':'trimf',[0.1 0.5 0.9]
+MF3='hot':'trimf',[0.600291005291005 1.00029100529101 1.39529100529101]
+
+[Input2]
+Name='humidity'
+Range=[0 1]
+NumMFs=3
+MF1='low':'trimf',[-0.4 0 0.4]
+MF2='medium':'trimf',[0.1 0.5 0.9]
+MF3='high':'trimf',[0.6 1 1.4]
+
+[Input3]
+Name='soil_moisture'
+Range=[0 1]
+NumMFs=3
+MF1='low':'trimf',[-0.4 0 0.4]
+MF2='medium':'trimf',[0.1 0.5 0.9]
+MF3='high':'trimf',[0.6 1 1.4]
+
+[Input4]
+Name='nitrogen'
+Range=[0 1]
+NumMFs=3
+MF1='low':'trimf',[-0.4 0 0.4]
+MF2='medium':'trimf',[0.1 0.5 0.9]
+MF3='high':'trimf',[0.6 1 1.4]
+
+[Input5]
+Name='light_intensity'
+Range=[0 1]
+NumMFs=3
+MF1='shadow':'trimf',[-0.4 0 0.4]
+MF2='semi-shadow':'trimf',[0.1 0.5 0.9]
+MF3='sunlight':'trimf',[0.6 1 1.4]
+
+[Output1]
+Name='probability_of_infection'
+Range=[0 1]
+NumMFs=3
+MF1='low':'constant',[0]
+MF2='medium':'constant',[0.5]
+MF3='high':'constant',[1]
+
+[Rules]

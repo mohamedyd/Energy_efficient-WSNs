@@ -1,0 +1,9 @@
+SERVER THIS_HOST ANY 27000
+VENDOR nilm
+PACKAGE LabVIEW_AdvSigProc_PKG nilm 8.0600 \
+	COMPONENTS=LabVIEW_AdvSigProc SIGN=99FB43E6F780
+INCREMENT LabVIEW_AdvSigProc_PKG nilm 8.0600 permanent uncounted \
+	VENDOR_STRING="TEAM TBE" HOSTID=000c29a04964 \
+	vendor_info="TYPE=Toolkit LABEL=Advanced Signal Processing \
+	Toolkit URL=http://digital.ni.com/express.nsf/bycode/aspt" \
+	TS_OK SIGN=6F6FE7CECFBE

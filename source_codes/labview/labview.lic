@@ -1,0 +1,12 @@
+SERVER THIS_HOST ANY 27000
+VENDOR nilm
+PACKAGE LabVIEW_PDSM_PKG nilm 8.0600 COMPONENTS="LabVIEW_Core \
+	LabVIEW_Base LabVIEW_Full LabVIEW_Pro LabVIEW_PDS \
+	LabVIEW_AppBuilder LabVIEW_Math LabVIEW_LabVIEW:7.0100 \
+	NIDAQ_DAQAssistant:7.0000" SIGN=3A5D4D705398
+INCREMENT LabVIEW_PDSM_PKG nilm 8.0600 permanent uncounted \
+	VENDOR_STRING="TEAM TBE" HOSTID=000c29a04964 \
+	vendor_info="FAMILY=LabVIEW_ADE_080600 TYPE=Application \
+	LABEL=Professional Development System with MathScript \
+	URL=http://digital.ni.com/express.nsf/bycode/exszch" TS_OK \
+	SIGN=D725FFCE5A4A

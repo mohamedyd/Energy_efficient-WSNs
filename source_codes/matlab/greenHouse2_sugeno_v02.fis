@@ -1,0 +1,65 @@
+[System]
+Name='greenHouse2_sugeno_v02'
+Type='sugeno'
+Version=2.0
+NumInputs=5
+NumOutputs=1
+NumRules=3
+AndMethod='prod'
+OrMethod='probor'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='wtaver'
+
+[Input1]
+Name='temperature'
+Range=[15 60]
+NumMFs=3
+MF1='in1mf1':'gaussmf',[7.95495128834866 60]
+MF2='in1mf2':'gaussmf',[7.95495128834866 15]
+MF3='in1mf3':'gaussmf',[7.95495128834866 19]
+
+[Input2]
+Name='humidity'
+Range=[10 66]
+NumMFs=3
+MF1='in2mf1':'gaussmf',[9.89949493661167 10]
+MF2='in2mf2':'gaussmf',[9.89949493661167 66]
+MF3='in2mf3':'gaussmf',[9.89949493661167 20]
+
+[Input3]
+Name='soil'
+Range=[20 90]
+NumMFs=3
+MF1='in3mf1':'gaussmf',[12.3743686707646 20]
+MF2='in3mf2':'gaussmf',[12.3743686707646 44]
+MF3='in3mf3':'gaussmf',[12.3743686707646 90]
+
+[Input4]
+Name='nitrogen'
+Range=[20 70]
+NumMFs=3
+MF1='in4mf1':'gaussmf',[8.83883476483184 30]
+MF2='in4mf2':'gaussmf',[8.83883476483184 20]
+MF3='in4mf3':'gaussmf',[8.83883476483184 70]
+
+[Input5]
+Name='light'
+Range=[52 70]
+NumMFs=3
+MF1='in5mf1':'gaussmf',[3.18198051533946 52]
+MF2='in5mf2':'gaussmf',[3.18198051533946 70]
+MF3='in5mf3':'gaussmf',[3.18198051533946 60]
+
+[Output1]
+Name='probability'
+Range=[10 50]
+NumMFs=3
+MF1='out1mf1':'linear',[0.0778714639600366 0.0129785673925653 0.025957164587453 0.0389357319800183 0.0674886279302882 0.00129785761237144]
+MF2='out1mf2':'linear',[0.0507700762318564 0.223388406913728 0.148925326473545 0.0676934548391728 0.236926823738031 0.00338466465473175]
+MF3='out1mf3':'linear',[0.0547170921418001 0.0575969673300278 0.259186859620968 0.201589951902861 0.172790842392715 0.00287984311580658]
+
+[Rules]
+1 1 1 1 1, 1 (1) : 1
+2 2 2 2 2, 2 (1) : 1
+3 3 3 3 3, 3 (1) : 1

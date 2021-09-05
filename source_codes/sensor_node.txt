@@ -1,0 +1,733 @@
+----------------------------------------------------------------------------------
+-- Company: 
+-- Engineer: 
+-- 
+-- Create Date:    08:39:19 04/18/2008 
+-- Design Name: 
+-- Module Name:    leaf_node - Behavioral 
+-- Project Name: 
+-- Target Devices: 
+-- Tool versions: 
+-- Description: 
+--
+-- Dependencies: 
+--
+-- Revision: 
+-- Revision 0.01 - File Created
+-- Additional Comments: 
+--
+----------------------------------------------------------------------------------
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+---- Uncomment the following library declaration if instantiating
+---- any Xilinx primitives in this code.
+--library UNISIM;
+--use UNISIM.VComponents.all;
+
+entity leaf_node is
+    Port ( CLK : in  STD_LOGIC;
+           RST : in  STD_LOGIC;
+           ENABLE : in STD_LOGIC;
+           SYSTEM_TIMER_IN : in  STD_LOGIC_VECTOR (15 downto 0);
+           RST_SYS_COUNTER : out  STD_LOGIC;
+           MAC_TIME : in  STD_LOGIC_VECTOR (15 downto 0);
+           TIMER_5_IN : in  STD_LOGIC_VECTOR (4 downto 0);
+           RST_TIMER_5 : out  STD_LOGIC;
+           MUX_SELECT : out  STD_LOGIC;
+           RTS : out  STD_LOGIC;
+           SAMPLE : out  STD_LOGIC;
+           SENSOR_READING_IN : in  STD_LOGIC_VECTOR (15 downto 0);
+           PACKET_READY : in  STD_LOGIC;
+           RECEPTION_READY : in  STD_LOGIC;
+           SENSOR_READING_READY : in  STD_LOGIC;
+           START_EPOCH : in  STD_LOGIC;
+           TRANSMISSION_READY : in  STD_LOGIC;
+           ENABLE_TYPE : out  STD_LOGIC_VECTOR (1 downto 0);
+           STATE_RECEIVE : out  STD_LOGIC_VECTOR (2 downto 0);
+           TRANSMIT_STATUS : out  STD_LOGIC_VECTOR (1 downto 0);
+           CONSTRUCT_PACKET : out  STD_LOGIC;
+           RST_CONTROL : out  STD_LOGIC;
+           RST_POINTERS : out  STD_LOGIC;
+           SYNCH1 : out  STD_LOGIC;
+           TRANSMIT : out  STD_LOGIC;
+           TRANSMIT_SENSOR_READING : out  STD_LOGIC;
+			  LED_STATUS : out STD_LOGIC_VECTOR (4 downto 0)
+			  );
+end leaf_node;
+
+architecture Behavioral of leaf_node is
+
+------------------------------ WRITE PROCEDURES HERE----------------------
+
+procedure multiply(a,b : in std_logic_vector(21 downto 0);
+                   mult_result : out std_logic_vector(43 downto 0)
+						 ) is
+						 begin
+						   mult_result := a * b;
+end;
+
+
+procedure addition(a,b : in std_logic_vector(15 downto 0);
+                     sum : out std_logic_vector(15 downto 0);
+							carry : out std_logic) is
+							
+							variable s : std_logic_vector(15 downto 0);
+							variable c : std_logic;							
+begin
+
+c := '0';
+for i in 0 to 15 loop
+    s(i) := a(i) xor b(i) xor c;
+    c := (a(i) and b(i)) or (a(i) and c) or (b(i) and c);
+end loop;
+
+sum := s;
+carry := c;
+end;
+
+
+procedure subtraction(a,b : in std_logic_vector(16 downto 0);
+                     sum : out std_logic_vector(16 downto 0);
+							carry : out std_logic) is
+							
+							variable s : std_logic_vector(16 downto 0);
+							variable c : std_logic;							
+begin
+
+c := '1';
+for i in 0 to 16 loop
+    s(i) := a(i) xor(not(b(i))) xor c;
+    c := (a(i) and(not(b(i)))) or (a(i) and c) or (c and (not(b(i))));
+end loop;
+
+sum := s;
+carry := c;
+end;
+
+---------------------------------- END PROCEDURE --------------------------
+
+
+--TYPE STATE_TYPE IS (COLD_START, EPOCH_START, PACKET_CONSTRUCT, TIMER_20ms,
+--                    WAIT_TRANSMISSION_SLOT, TRANSMISSION, END_EPOCH,
+--						  SAMPLE_SENSOR, LMS_ALGORITHM, CALC_SWITCH_ON,
+--						  SLEEP, WAIT_ON_TIME, WAKE);
+--
+--SIGNAL LEAF_STATE : STATE_TYPE;
+
+--SIGNAL sleep_event : std_logic_vector(1 downto 0) := "00";
+
+BEGIN
+
+LEAF_NODE_PROC : PROCESS(CLK, RST, ENABLE)
+----- VARIABLE DECLARATIONS ------						  
+--VARIABLE PREDICTED_SENSOR_READING : STD_LOGIC_VECTOR(15 DOWNTO 0):= (OTHERS =>'0');
+VARIABLE SENSOR_1 : STD_LOGIC_VECTOR(15 DOWNTO 0):= (OTHERS =>'0'); --"0000110101100101";
+VARIABLE SENSOR_2 : STD_LOGIC_VECTOR(15 DOWNTO 0):= (OTHERS =>'0'); --"0010010101001000";
+VARIABLE SENSOR_3 : STD_LOGIC_VECTOR(15 DOWNTO 0):= (OTHERS =>'0'); --"0000111101111010";
+VARIABLE SENSOR_4 : STD_LOGIC_VECTOR(15 DOWNTO 0):= (OTHERS =>'0'); --"0000111110010100";
+
+VARIABLE WEIGHT_1 : STD_LOGIC_VECTOR(13 DOWNTO 0):= (OTHERS =>'0'); --"00001010101010";  -- 14 BITS FRACTION
+VARIABLE WEIGHT_2 : STD_LOGIC_VECTOR(13 DOWNTO 0):= (OTHERS =>'0'); --"00011101100010";  -- 14 BITS FRACTION
+VARIABLE WEIGHT_3 : STD_LOGIC_VECTOR(13 DOWNTO 0):= (OTHERS =>'0'); --"01100100101010";  -- 14 BITS FRACTION
+VARIABLE WEIGHT_4 : STD_LOGIC_VECTOR(13 DOWNTO 0):= (OTHERS =>'0'); --"00111010101010";  -- 14 BITS FRACTION
+
+
+VARIABLE state_counter : STD_LOGIC_VECTOR(4 DOWNTO 0) := "00000";
+
+variable accumulator_A : std_logic_vector(15 downto 0) := (OTHERS =>'0');
+variable accumulator_B : std_logic_vector(15 downto 0) := (OTHERS =>'0');
+variable mult_result : std_logic_vector(43 downto 0) := (OTHERS =>'0');
+variable sum_out : std_logic_vector(15 downto 0) := (OTHERS =>'0');
+variable sub_out : std_logic_vector(16 downto 0) := (OTHERS =>'0');
+variable carry_out : std_logic := '0';
+variable sub_carry_out : std_logic := '0';
+variable predicted_sensor_reading : std_logic_vector(15 downto 0) := (OTHERS =>'0');
+variable sensor_reading_ps : std_logic_vector(15 downto 0) := (OTHERS => '0');
+variable error : std_logic_vector(15 downto 0) := (OTHERS => '0');
+variable mu : std_logic_vector(21 downto 0) := "0000000000000000000010";
+variable temp : std_logic_vector(21 downto 0) := (others => '0');
+variable temp2 : std_logic_vector(13 downto 0) := (others => '0');
+variable sign_flag : std_logic := '0';
+variable sign_flag1 : std_logic := '0';
+
+variable op_A : std_logic_vector(21 downto 0) := (OTHERS =>'0');
+variable op_B : std_logic_vector(21 downto 0) := (OTHERS =>'0');
+
+variable exceed_threshold : std_logic := '0';
+variable synchronized : std_logic := '0';
+variable sample_counter : std_logic_vector (7 downto 0) := (OTHERS => '0');
+variable construct_packet_type : std_logic := '0';
+
+variable time_to_transmit : std_logic_vector(15 downto 0) := (OTHERS => '0');
+variable end_of_epoch_time : std_logic_vector(15 downto 0) := (OTHERS => '0');
+variable time_to_wake_up : std_logic_vector(15 downto 0) := (OTHERS => '0');
+variable sleep_event : std_logic_vector(1 downto 0) := "00";
+
+variable LEAF_STATE : std_logic_vector(3 downto 0) := "0000";
+
+
+
+
+----- END VARIABLE DECLARATIONS --
+
+BEGIN
+
+----- SELECTION OF OPERATORS FOR ADDITION, SUBTRACTION OR MULTIPLICATION
+----- DEPENDS ON STATE AND FOR STATE LMS_ALGORITHM DEPENDS ON THE STATE_COUNTER
+
+case LEAF_STATE is 
+  
+  when "1001" => --CALC_SWITCH_ON 
+       op_A := "000000" & end_of_epoch_time;
+		 op_B := "0000000000000000010000"; -- 16 counts equivalent to 12 ms
+  
+  when "1000" => -- LMS_ALGORITHM 
+       --selects operators for multiplication, addition or subtraction
+    case state_counter is	 
+	   when "00000" =>
+		    op_A := "00000000" & weight_1;  -- multiplication 22 bits
+		    op_B := sensor_1 & "000000";
+			 
+			 
+		when "00001" =>
+		    op_A := "00000000" & weight_2;  -- multiplication 22 bits
+		    op_B := sensor_2 & "000000";	
+
+			 
+      when "00010" =>
+		    op_A := "000000" & accumulator_A;        -- addition 16 bits
+		    op_B := "000000" & accumulator_B;
+
+			 
+	   when "00011" =>
+		    op_A := "00000000" & weight_3;     -- multiplication 22 bits
+		    op_B := sensor_3 & "000000";	
+
+			 
+	   when "00100" =>
+		    op_A := "000000" & accumulator_A;        -- 16 bit addition
+		    op_B := "000000" & accumulator_B;	
+
+			 
+      when "00101" =>
+		    op_A := "00000000" & weight_4;     -- multiplication 22 bits
+		    op_B := sensor_4 & "000000";
+
+			 
+	   when "00110" =>
+		    op_A := "000000" & accumulator_A;  -- 16 bit addition
+		    op_B := "000000" & accumulator_B;
+
+			 
+		when "00111" =>
+        if predicted_sensor_reading > sensor_reading_ps then  -- 17 bit subtraction
+	   	    op_A := "000000" & predicted_sensor_reading;
+		     op_B := "000000" & sensor_reading_ps;
+           sign_flag1 := '1';		       	  				  			  				   
+			  else 
+		     op_A := "000000" & sensor_reading_ps;	  				  			  				   
+	   	    op_B := "000000" & predicted_sensor_reading;
+	   	  sign_flag1 := '0';
+			  end if;
+
+			  
+		 when "01001" => -- update weights
+		    op_A := mu;
+		    op_B := error & "000000";	  		-- 22 bit multiplication		  			  	
+		
+		
+		 when "01010" =>
+		    op_A := temp;
+		    op_B := sensor_1 & "000000";	   -- 22 bit multipliaction 
+
+			 
+		 when "01011" =>
+		    op_A := "00000000" & weight_1;      
+		    op_B := "00000000" & temp2;
+
+			 
+		 when "01100" =>                    -- 22 bit multiplication
+			  op_A := temp;
+		     op_B := sensor_2 & "000000";
+
+			 
+		 when "01101" => 						   
+		    op_A := "00000000" & weight_2;
+		    op_B := "00000000" & temp2;
+
+			 
+		 when "01110" =>							-- 22 bit multiplication
+			 op_A := temp;
+		    op_B := sensor_3 & "000000";
+			 
+			 
+		 when "01111" =>							
+		    op_A := "00000000" & weight_3;
+		    op_B := "00000000" & temp2;
+
+			 
+		 when "10000" =>							-- 22 bit multiplication
+			 op_A := temp;
+		    op_B := sensor_4 & "000000";
+			 
+			 
+		 when "10001" =>
+		    op_A := "00000000" & weight_4;  
+		    op_B := "00000000" & temp2;
+			 
+			 
+	    when others => null;
+		 end case;
+
+when others => null;
+end case;
+
+--do multiply		 
+		 multiply(op_A, op_B, mult_result);
+
+--do addition		 
+		 addition(op_A(15 downto 0), op_B(15 downto 0), sum_out, carry_out);
+
+--do subtraction		 
+		 subtraction(op_A(16 downto 0), op_B(16 downto 0), sub_out, sub_carry_out);
+		 
+		 sign_flag := sign_flag1;
+		 
+		 
+		 if (RST = '1') then
+		     RST_SYS_COUNTER <= '1';
+			  RST_TIMER_5 <= '1';
+			  MUX_SELECT <= '0'; -- TXR SIDE
+			  RTS <= '0';
+			  SAMPLE <= '0';
+			  ENABLE_TYPE <= "00"; -- IDLE
+			  STATE_RECEIVE <= "000";
+			  TRANSMIT_STATUS <= "00";
+			  CONSTRUCT_PACKET <= '0';
+			  RST_CONTROL <= '1';
+			  RST_POINTERS <= '1';
+			  SYNCH1 <= '0';
+			  TRANSMIT <= '0';
+			  TRANSMIT_SENSOR_READING <= '0';
+			  LEAF_STATE := "0000"; -- COLD_START
+			  
+			  synchronized := '0';
+			  sample_counter := (others => '0');
+			  construct_packet_type := '0';
+			  sign_flag := '0';
+			  
+			elsif (CLK'EVENT AND CLK = '1') then
+			    
+			    if ENABLE = '1' then
+			  
+			  case LEAF_STATE is
+			     
+				  when "0000" => -- COLD_START 
+				     if (SYSTEM_TIMER_IN <  "0000000000000001") THEN  -- "0000000001101111") then  -- equvalent to 85 ms 
+					      RST_SYS_COUNTER <= '0'; 
+					  else
+					      RST_SYS_COUNTER <= '1';
+							ENABLE_TYPE <= "01";
+							STATE_RECEIVE <= "000";
+							RST_CONTROL <= '0';
+							RST_POINTERS <= '0';
+							MUX_SELECT <= '0';
+							LEAF_STATE := "0001"; -- EPOCH_START;
+						end if;
+						
+						
+					when "0001" => -- EPOCH_START 
+					   if START_EPOCH = '1' then
+						   RST_SYS_COUNTER <= '0';
+							LEAF_STATE := "0010"; -- PACKET_CONSTRUCT;
+							construct_packet_type := '0';
+							RST_CONTROL <= '1';
+							RST_POINTERS <= '1';
+							synchronized := '0';
+						 end if;
+					 
+					 
+					 when "0010" => -- PACKET_CONSTRUCT 
+					      if PACKET_READY = '0' then
+							   ENABLE_TYPE <= "10";
+								CONSTRUCT_PACKET <= '1';
+								RST_CONTROL <= '0';
+								RST_POINTERS <= '0';
+								
+								case construct_packet_type is 
+								   
+									when '0' => 
+									   SYNCH1 <= '0';
+										TRANSMIT_SENSOR_READING <= '0';
+									
+									--when "01" =>			THIS CONDITION DOES NOT EXIST FOR LEAF NODE	
+									--   SYNCH1 <= '1';
+									--	TRANSMIT_SENSOR_READING <= '0';
+										
+									when '1' =>
+									   SYNCH1 <= '1';
+										TRANSMIT_SENSOR_READING <= '1';
+									
+									when others => null;
+									
+									end case;
+							
+							else  -- packet ready
+                           RST_CONTROL <= '1';
+                           CONSTRUCT_PACKET <= '0';
+                           ENABLE_TYPE <= "00";
+                          
+                         -- next state depends on the variable 'synchronized'
+                         
+                         if synchronized = '0' then
+                            LEAF_STATE := "0011"; -- TIMER_20ms;
+									 RST_TIMER_5 <= '1';
+								 else
+								     LEAF_STATE := "0100"; -- WAIT_TRANSMISSION_SLOT;
+								 end if;
+							 end if;
+									  
+						
+						when "0011" => --TIMER_20ms 
+						   if TIMER_5_IN < "11010" then -- equivalent to 20 ms
+							   RST_TIMER_5 <= '0';
+							else
+							   time_to_transmit := SYSTEM_TIMER_IN;
+								RST_TIMER_5 <= '1';
+								LEAF_STATE := "0101"; -- TRANSMISSION;
+							end if;
+							
+						
+						when "0100" => --WAIT_TRANSMISSION_SLOT 
+						   if time_to_transmit = SYSTEM_TIMER_IN then
+							   LEAF_STATE := "0101"; --TRANSMISSION;
+							end if;
+							
+						
+						when "0101" => -- TRANSMISSION 
+						   if TRANSMISSION_READY = '0' then
+							   RST_CONTROL <= '0';
+								ENABLE_TYPE <= "11";
+								TRANSMIT_STATUS <= "10";
+								TRANSMIT <= '1';
+							else
+							   -- transmission ready
+								RST_CONTROL <= '1';
+								RST_POINTERS <= '1';
+								ENABLE_TYPE <= "00";
+								TRANSMIT <= '0';
+								
+								if synchronized = '1' then
+								   LEAF_STATE := "1010"; -- SLEEP;
+								else
+								   LEAF_STATE := "0110"; -- END_EPOCH;
+								end if;
+							 end if;
+							
+								
+						when "0110" => -- END_EPOCH 
+                     RTS <= '0';
+							MUX_SELECT <= '0';
+							
+							if START_EPOCH = '0' then
+							   RST_CONTROL <= '0';
+								RST_POINTERS <= '0';
+								ENABLE_TYPE <= "01";
+								STATE_RECEIVE <= "000";
+							else
+							   if synchronized = '0' then
+								   end_of_epoch_time := MAC_TIME;
+								end if;
+								
+								RST_CONTROL <= '1';
+								ENABLE_TYPE <= "00";
+								RST_SYS_COUNTER <= '1';
+								LEAF_STATE := "0111"; -- SAMPLE_SENSOR;
+							end if;
+						
+						
+						when "1001" => --CALC_SWITCH_ON 
+						   time_to_wake_up := sub_out(15 downto 0);
+							synchronized := '1';
+							LEAF_STATE := "1000"; -- LMS_ALGORITHM;
+							state_counter := "00000";
+						
+						
+						when "1010" => --SLEEP 
+						   MUX_SELECT <= '0';
+							
+							case sleep_event is
+							   when "00" =>
+								   -- send sleep command
+									if TRANSMISSION_READY = '0' then
+									   ENABLE_TYPE <= "11";
+										TRANSMIT_STATUS <= "01"; -- sleep command
+										RST_CONTROL <= '0';
+										TRANSMIT <= '1';
+									else
+									   RST_CONTROL <= '1';
+										sleep_event := "01";
+										TRANSMIT <= '0';
+									end if;
+								
+								when "01" =>
+								   -- wait for ACK
+									if RECEPTION_READY = '0' then
+									   ENABLE_TYPE <= "01";
+										STATE_RECEIVE <= "010";
+										RST_CONTROL <= '0';
+									else
+									   RST_CONTROL <= '1';
+										sleep_event := "10";
+									end if;
+								
+								when "10" =>
+								   -- send ACK back
+									if TRANSMISSION_READY = '0' then
+									   ENABLE_TYPE <= "11";
+										TRANSMIT_STATUS <= "00";
+										TRANSMIT <= '1';
+										RST_CONTROL <= '0';
+									else
+									   TRANSMIT <= '0';
+										ENABLE_TYPE <= "00";
+										RST_CONTROL <= '1';
+										sleep_event := "00";
+										LEAF_STATE := "1011"; -- WAIT_ON_TIME;
+									end if;
+								
+								when others => null;
+								
+								end case;
+						
+						when "1011" => -- WAIT_ON_TIME 
+                     if SYSTEM_TIMER_IN = time_to_wake_up then
+                        LEAF_STATE := "1100"; -- WAKE;
+                        RTS <= '1';
+								RST_TIMER_5 <= '0';
+							end if;
+						
+						
+						when "1100" => -- WAKE
+						   if TIMER_5_IN = "00010" then -- 1.5 ms
+							   RTS <= '0';
+								LEAF_STATE := "0110"; -- END_EPOCH;
+								RST_TIMER_5 <= '1';
+							end if;
+							
+						
+						when "0111" => -- SAMPLE_SENSOR 
+						   MUX_SELECT <= '1';
+							RST_SYS_COUNTER <= '0';
+							
+							if SENSOR_READING_READY = '0' then
+                        RST_CONTROL <= '0';
+								ENABLE_TYPE <= "01";
+								STATE_RECEIVE <= "011";
+								SAMPLE <= '1';
+							else
+							   RST_CONTROL <= '1';
+								SAMPLE <= '0';
+								sample_counter := sample_counter + 1;
+								
+								if synchronized = '0' then
+								   LEAF_STATE := "1001"; -- CALC_SWITCH_ON;
+								else
+								   LEAF_STATE := "1000"; -- LMS_ALGORITHM;
+								   state_counter := "00000";
+								end if;
+							end if;
+							
+							
+							when "1000" => -- LMS_ALGORITHM 
+							   
+		case state_counter is
+								
+	     when "00000" =>
+	        --transmit <= '0';
+	        sensor_reading_ps := SENSOR_READING_IN;
+			  accumulator_A := mult_result(35 downto 20);
+			  state_counter := "00001";
+			  
+			  
+		  when "00001" =>
+				  accumulator_B := mult_result(35 downto 20);
+				  state_counter := "00010";
+				  
+				  
+        when "00010" =>
+				  accumulator_A := sum_out;
+				  state_counter := "00011";			  
+				  
+				  
+		  when "00011" =>
+				  accumulator_B := mult_result(35 downto 20);
+				  state_counter := "00100";	  
+				  
+				  
+		  when "00100" =>
+				  accumulator_A := sum_out;
+				  state_counter := "00101";
+
+				  
+		  when "00101" =>
+				  accumulator_B := mult_result(35 downto 20);
+				  state_counter := "00110";
+
+				  
+		  when "00110" =>
+				  predicted_sensor_reading := sum_out;
+				  --predicted_reading <= predicted_sensor_reading;
+				  state_counter := "00111";
+
+				  
+		  when "00111" =>				  
+				  error := sub_out(15 downto 0);
+				  state_counter := "01000";
+
+				  
+		  when "01000" =>
+		        if (error > "0000000010000000" OR sample_counter = "01100100") then
+				     --transmit <= '1';
+					  state_counter := "01001"; -- update weights
+					  exceed_threshold := '1'; -- transmit sensor reading
+                 					  
+				  else
+				     --transmit <= '0'; -- do not transmit or update weights
+					  sensor_reading_ps := predicted_sensor_reading;
+					  exceed_threshold := '0'; -- do not transmit sensor reading
+					  state_counter := "10010"; -- skip to FIFO operation
+					  
+				  end if;
+				  
+			
+			when "01001" => -- update weights
+			     -- calculate constant mu * error
+				  temp := mult_result(35 downto 14);
+				  state_counter := "01010";
+				  
+				  
+			
+			when "01010" =>
+			     -- update weight_1
+				  temp2 := mult_result(27 downto 14);
+				  state_counter := "01011";
+				  
+				  
+			
+			when "01011" =>
+			     if sign_flag = '0' then
+				     weight_1 := sum_out(13 downto 0);
+				  else
+				     weight_1 := sub_out(13 downto 0);
+				  end if;
+				  state_counter := "01100";
+				  
+				  
+				  
+			when "01100" =>
+			     -- update weight_2
+				  temp2 := mult_result(27 downto 14);
+				  state_counter := "01101";
+				  
+				  
+			
+			when "01101" =>
+			     if sign_flag = '0' then
+           				  weight_2 := sum_out(13 downto 0);
+      				  else
+      				     weight_2 := sub_out(13 downto 0);
+   				  end if;
+				  state_counter := "01110";
+				  
+				  
+			
+			when "01110" =>
+			     -- update weight_3
+				  temp2 := mult_result(27 downto 14);
+				  state_counter := "01111";
+				  
+				  
+			
+			when "01111" =>
+			     if sign_flag = '0' then
+           				  weight_3 := sum_out(13 downto 0);
+  				  else
+  				     weight_3 := sub_out(13 downto 0);
+  				  end if;
+				  state_counter := "10000";
+				  
+				  
+			
+			
+			when "10000" =>
+			     -- update weight_4
+				  temp2 := mult_result(27 downto 14);
+				  state_counter := "10001";
+				  
+				  
+			
+			when "10001" =>
+			     if sign_flag = '0' then
+				     weight_4 := sum_out(13 downto 0);
+				  else
+				     weight_4 := sub_out(13 downto 0);
+				  end if;
+				  state_counter := "10010";
+				  
+				  
+			
+			when "10010" =>
+			    -- perform FIFO operation
+				 sensor_4 := sensor_3;
+				 state_counter := "10011";
+				 
+				 
+				 				 
+			when "10011" =>
+				 sensor_3 := sensor_2;
+				 state_counter := "10100";
+				 
+				 
+				
+			when "10100" =>
+				 sensor_2 := sensor_1;
+				 state_counter := "10101";
+				 
+				 
+						
+			when "10101" =>
+				 sensor_1 := sensor_reading_ps;
+				 --state_counter := "00000";
+             if exceed_threshold = '0' then
+                LEAF_STATE := "1010"; -- SLEEP;
+             else
+                LEAF_STATE := "0010"; -- PACKET_CONSTRUCT;
+					 construct_packet_type := '1';
+				 end if;
+				 
+				  		   	  
+		   when others => null;
+		  
+		 end case;
+		 
+when others => LEAF_STATE := "0000";
+
+
+
+end case;
+
+end if;
+
+end if;
+
+LED_STATUS(3 downto 0) <= LEAF_STATE;
+LED_STATUS(4) <= exceed_threshold;
+
+end process;									
+
+end Behavioral;
+

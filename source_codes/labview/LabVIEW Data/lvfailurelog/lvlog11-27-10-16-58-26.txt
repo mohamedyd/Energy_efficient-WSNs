@@ -1,0 +1,58 @@
+####
+#Date: Thu, Nov 25, 2010 9:56:00 PM
+#OSName: Windows NT
+#OSVers: 5.1
+#AppName: LabVIEW
+#Version: 8.6
+#AppKind: FDS
+#AppModDate: 06/25/2008 19:25 GMT
+
+
+
+c:\builds\penguin\labview\branches\Saturn\dev\source\editor\help.cpp(2733) : DWarn: GetObjectOnlineHelp : I don't know how get help for this kDCOClan object DPId: 37 [[VI "adaptive_filter_prediction.vi" (0x08a2efa8)]]
+$Id: //labview/branches/Saturn/dev/source/editor/help.cpp#37 $
+0x00A03746 - LabVIEW <unknown> + 0
+0x00A077EB - LabVIEW <unknown> + 0
+0x00E3A5B9 - LabVIEW <unknown> + 0
+0x00DBAA01 - LabVIEW <unknown> + 0
+0x00E43000 - LabVIEW <unknown> + 0
+0x00E4C512 - LabVIEW <unknown> + 0
+0x77D48709 - USER32 <unknown> + 0
+0x77D487EB - USER32 <unknown> + 0
+0x77D4B368 - USER32 <unknown> + 0
+0x77D4B3B4 - USER32 <unknown> + 0
+0x7C90EAE3 - ntdll <unknown> + 0
+0x77D4BCCC - USER32 <unknown> + 0
+0x00404264 - LabVIEW <unknown> + 0
+0x00404696 - LabVIEW <unknown> + 0
+0x100014A6 - QtManager431 <unknown> + 0
+0x67093321 - NIQtCore431 <unknown> + 0
+0x00000000 - LabVIEW <unknown> + 0
+0x00000000 - LabVIEW <unknown> + 0
+*** Dumping Bread Crumb Stack ***
+Drawing HelpObj: VI adaptive_filter_prediction.vi, HeapClass BDHP, UID 1614, DPID 21
+*** End Dump ***
+
+c:\builds\penguin\labview\branches\Saturn\dev\source\editor\help.cpp(2733) : DWarn: GetObjectOnlineHelp : I don't know how get help for this kDCOClan object DPId: 37 [[VI "adaptive_filter_prediction.vi" (0x08a2efa8)]]
+$Id: //labview/branches/Saturn/dev/source/editor/help.cpp#37 $
+0x00A03746 - LabVIEW <unknown> + 0
+0x00A077EB - LabVIEW <unknown> + 0
+0x00E3A5B9 - LabVIEW <unknown> + 0
+0x00DBAA01 - LabVIEW <unknown> + 0
+0x00E43000 - LabVIEW <unknown> + 0
+0x00E4C512 - LabVIEW <unknown> + 0
+0x77D48709 - USER32 <unknown> + 0
+0x77D487EB - USER32 <unknown> + 0
+0x77D4B368 - USER32 <unknown> + 0
+0x77D4B3B4 - USER32 <unknown> + 0
+0x7C90EAE3 - ntdll <unknown> + 0
+0x77D4BCCC - USER32 <unknown> + 0
+0x00404264 - LabVIEW <unknown> + 0
+0x00404696 - LabVIEW <unknown> + 0
+0x100014A6 - QtManager431 <unknown> + 0
+0x67093321 - NIQtCore431 <unknown> + 0
+0x00000000 - LabVIEW <unknown> + 0
+0x00000000 - LabVIEW <unknown> + 0
+*** Dumping Bread Crumb Stack ***
+Drawing HelpObj: VI adaptive_filter_prediction.vi, HeapClass BDHP, UID 1614, DPID 21
+*** End Dump ***

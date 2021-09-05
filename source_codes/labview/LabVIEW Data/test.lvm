@@ -1,0 +1,255 @@
+LabVIEW Measurement	
+Writer_Version	2
+Reader_Version	2
+Separator	Tab
+Decimal_Separator	.
+Multi_Headings	Yes
+X_Columns	Multi
+Time_Pref	Absolute
+Operator	Administrator
+Date	2010/12/02
+Time	21:22:29.765625
+***End_of_Header***	
+	
+Channels	4							
+Samples	1		1		1		1	
+Date	2010/12/02		2010/12/02		2010/12/02		2010/12/02	
+Time	21:22:29.765625		21:22:29.765625		21:22:29.765625		21:22:29.765625	
+X_Dimension	Time		Time		Time		Time	
+X0	9.2800000000000005E-1		9.2800000000000005E-1		9.2800000000000005E-1		9.2800000000000005E-1	
+Delta_X	0.001000		0.001000		0.001000		0.001000	
+***End_of_Header***								
+X_Value	Sine with Gaussian Noise (Maximum)	X_Value	Sine with Gaussian Noise (Minimum)	X_Value	Sine with Gaussian Noise (Formula Result)	X_Value	Sine with Gaussian Noise (Formula Result) 1	Comment
+0.928000	-0.115950	0.928000	-0.814728	0.928000	0.698778	0.928000	0.628000
+
+Channels	4							
+Samples	1		1		1		1	
+Date	2010/12/02		2010/12/02		2010/12/02		2010/12/02	
+Time	21:22:29.765625		21:22:29.765625		21:22:29.765625		21:22:29.765625	
+X_Dimension	Time		Time		Time		Time	
+X0	1.1190000000000000E+0		1.1190000000000000E+0		1.1190000000000000E+0		1.1190000000000000E+0	
+Delta_X	0.001000		0.001000		0.001000		0.001000	
+***End_of_Header***								
+X_Value	Sine with Gaussian Noise (Maximum)	X_Value	Sine with Gaussian Noise (Minimum)	X_Value	Sine with Gaussian Noise (Formula Result)	X_Value	Sine with Gaussian Noise (Formula Result) 1	Comment
+1.119000	0.000605	1.119000	-0.745051	1.119000	0.745656	1.119000	-0.033000
+
+Channels	4							
+Samples	1		1		1		1	
+Date	2010/12/02		2010/12/02		2010/12/02		2010/12/02	
+Time	21:22:29.765625		21:22:29.765625		21:22:29.765625		21:22:29.765625	
+X_Dimension	Time		Time		Time		Time	
+X0	4.0069999999999997E+0		4.0069999999999997E+0		4.0069999999999997E+0		4.0069999999999997E+0	
+Delta_X	0.001000		0.001000		0.001000		0.001000	
+***End_of_Header***								
+X_Value	Sine with Gaussian Noise (Maximum)	X_Value	Sine with Gaussian Noise (Minimum)	X_Value	Sine with Gaussian Noise (Formula Result)	X_Value	Sine with Gaussian Noise (Formula Result) 1	Comment
+4.007000	0.267098	4.007000	-1.271821	4.007000	1.538919	4.007000	-1.497000
+
+Channels	4							
+Samples	1		1		1		1	
+Date	2010/12/02		2010/12/02		2010/12/02		2010/12/02	
+Time	21:22:29.765625		21:22:29.765625		21:22:29.765625		21:22:29.765625	
+X_Dimension	Time		Time		Time		Time	
+X0	6.0209999999999999E+0		6.0209999999999999E+0		6.0209999999999999E+0		6.0209999999999999E+0	
+Delta_X	0.001000		0.001000		0.001000		0.001000	
+***End_of_Header***								
+X_Value	Sine with Gaussian Noise (Maximum)	X_Value	Sine with Gaussian Noise (Minimum)	X_Value	Sine with Gaussian Noise (Formula Result)	X_Value	Sine with Gaussian Noise (Formula Result) 1	Comment
+6.021000	0.241057	6.021000	-1.346004	6.021000	1.587061	6.021000	-1.003000
+
+Channels	4							
+Samples	1		1		1		1	
+Date	2010/12/02		2010/12/02		2010/12/02		2010/12/02	
+Time	21:22:29.765625		21:22:29.765625		21:22:29.765625		21:22:29.765625	
+X_Dimension	Time		Time		Time		Time	
+X0	8.8740000000000005E+0		8.8740000000000005E+0		8.8740000000000005E+0		8.8740000000000005E+0	
+Delta_X	0.001000		0.001000		0.001000		0.001000	
+***End_of_Header***								
+X_Value	Sine with Gaussian Noise (Maximum)	X_Value	Sine with Gaussian Noise (Minimum)	X_Value	Sine with Gaussian Noise (Formula Result)	X_Value	Sine with Gaussian Noise (Formula Result) 1	Comment
+8.874000	0.196696	8.874000	-1.241433	8.874000	1.438129	8.874000	-1.003000
+
+Channels	4							
+Samples	1		1		1		1	
+Date	2010/12/02		2010/12/02		2010/12/02		2010/12/02	
+Time	21:22:29.765625		21:22:29.765625		21:22:29.765625		21:22:29.765625	
+X_Dimension	Time		Time		Time		Time	
+X0	1.3275000000000000E+1		1.3275000000000000E+1		1.3275000000000000E+1		1.3275000000000000E+1	
+Delta_X	0.001000		0.001000		0.001000		0.001000	
+***End_of_Header***								
+X_Value	Sine with Gaussian Noise (Maximum)	X_Value	Sine with Gaussian Noise (Minimum)	X_Value	Sine with Gaussian Noise (Formula Result)	X_Value	Sine with Gaussian Noise (Formula Result) 1	Comment
+13.275000	0.301620	13.275000	-1.265914	13.275000	1.567534	13.275000	-2.256000
+
+Channels	4							
+Samples	1		1		1		1	
+Date	2010/12/02		2010/12/02		2010/12/02		2010/12/02	
+Time	21:22:29.765625		21:22:29.765625		21:22:29.765625		21:22:29.765625	
+X_Dimension	Time		Time		Time		Time	
+X0	1.5318000000000000E+1		1.5318000000000000E+1		1.5318000000000000E+1		1.5318000000000000E+1	
+Delta_X	0.001000		0.001000		0.001000		0.001000	
+***End_of_Header***								
+X_Value	Sine with Gaussian Noise (Maximum)	X_Value	Sine with Gaussian Noise (Minimum)	X_Value	Sine with Gaussian Noise (Formula Result)	X_Value	Sine with Gaussian Noise (Formula Result) 1	Comment
+15.318000	0.285852	15.318000	-1.299742	15.318000	1.585594	15.318000	-1.135000
+
+Channels	4							
+Samples	1		1		1		1	
+Date	2010/12/02		2010/12/02		2010/12/02		2010/12/02	
+Time	21:22:29.765625		21:22:29.765625		21:22:29.765625		21:22:29.765625	
+X_Dimension	Time		Time		Time		Time	
+X0	1.7673999999999999E+1		1.7673999999999999E+1		1.7673999999999999E+1		1.7673999999999999E+1	
+Delta_X	0.001000		0.001000		0.001000		0.001000	
+***End_of_Header***								
+X_Value	Sine with Gaussian Noise (Maximum)	X_Value	Sine with Gaussian Noise (Minimum)	X_Value	Sine with Gaussian Noise (Formula Result)	X_Value	Sine with Gaussian Noise (Formula Result) 1	Comment
+17.674000	0.259576	17.674000	-1.313311	17.674000	1.572887	17.674000	-1.007000
+
+Channels	4							
+Samples	1		1		1		1	
+Date	2010/12/02		2010/12/02		2010/12/02		2010/12/02	
+Time	21:22:29.765625		21:22:29.765625		21:22:29.765625		21:22:29.765625	
+X_Dimension	Time		Time		Time		Time	
+X0	2.0928000000000001E+1		2.0928000000000001E+1		2.0928000000000001E+1		2.0928000000000001E+1	
+Delta_X	0.001000		0.001000		0.001000		0.001000	
+***End_of_Header***								
+X_Value	Sine with Gaussian Noise (Maximum)	X_Value	Sine with Gaussian Noise (Minimum)	X_Value	Sine with Gaussian Noise (Formula Result)	X_Value	Sine with Gaussian Noise (Formula Result) 1	Comment
+20.928000	0.345323	20.928000	-0.786598	20.928000	1.131921	20.928000	-2.059000
+
+Channels	4							
+Samples	1		1		1		1	
+Date	2010/12/02		2010/12/02		2010/12/02		2010/12/02	
+Time	21:22:29.765625		21:22:29.765625		21:22:29.765625		21:22:29.765625	
+X_Dimension	Time		Time		Time		Time	
+X0	2.1219999999999999E+1		2.1219999999999999E+1		2.1219999999999999E+1		2.1219999999999999E+1	
+Delta_X	0.001000		0.001000		0.001000		0.001000	
+***End_of_Header***								
+X_Value	Sine with Gaussian Noise (Maximum)	X_Value	Sine with Gaussian Noise (Minimum)	X_Value	Sine with Gaussian Noise (Formula Result)	X_Value	Sine with Gaussian Noise (Formula Result) 1	Comment
+21.220000	0.135168	21.220000	-0.533747	21.220000	0.668914	21.220000	-0.072000
+
+Channels	4							
+Samples	1		1		1		1	
+Date	2010/12/02		2010/12/02		2010/12/02		2010/12/02	
+Time	21:22:29.765625		21:22:29.765625		21:22:29.765625		21:22:29.765625	
+X_Dimension	Time		Time		Time		Time	
+X0	2.2413000000000000E+1		2.2413000000000000E+1		2.2413000000000000E+1		2.2413000000000000E+1	
+Delta_X	0.001000		0.001000		0.001000		0.001000	
+***End_of_Header***								
+X_Value	Sine with Gaussian Noise (Maximum)	X_Value	Sine with Gaussian Noise (Minimum)	X_Value	Sine with Gaussian Noise (Formula Result)	X_Value	Sine with Gaussian Noise (Formula Result) 1	Comment
+22.413000	0.295468	22.413000	-0.524730	22.413000	0.820198	22.413000	-0.691000
+
+Channels	4							
+Samples	1		1		1		1	
+Date	2010/12/02		2010/12/02		2010/12/02		2010/12/02	
+Time	21:22:29.765625		21:22:29.765625		21:22:29.765625		21:22:29.765625	
+X_Dimension	Time		Time		Time		Time	
+X0	2.3937999999999999E+1		2.3937999999999999E+1		2.3937999999999999E+1		2.3937999999999999E+1	
+Delta_X	0.001000		0.001000		0.001000		0.001000	
+***End_of_Header***								
+X_Value	Sine with Gaussian Noise (Maximum)	X_Value	Sine with Gaussian Noise (Minimum)	X_Value	Sine with Gaussian Noise (Formula Result)	X_Value	Sine with Gaussian Noise (Formula Result) 1	Comment
+23.938000	0.032411	23.938000	-1.271990	23.938000	1.304401	23.938000	-0.924000
+
+Channels	4							
+Samples	1		1		1		1	
+Date	2010/12/02		2010/12/02		2010/12/02		2010/12/02	
+Time	21:22:29.765625		21:22:29.765625		21:22:29.765625		21:22:29.765625	
+X_Dimension	Time		Time		Time		Time	
+X0	2.6038000000000000E+1		2.6038000000000000E+1		2.6038000000000000E+1		2.6038000000000000E+1	
+Delta_X	0.001000		0.001000		0.001000		0.001000	
+***End_of_Header***								
+X_Value	Sine with Gaussian Noise (Maximum)	X_Value	Sine with Gaussian Noise (Minimum)	X_Value	Sine with Gaussian Noise (Formula Result)	X_Value	Sine with Gaussian Noise (Formula Result) 1	Comment
+26.038000	0.332342	26.038000	-1.237939	26.038000	1.570281	26.038000	-1.029000
+
+Channels	4							
+Samples	1		1		1		1	
+Date	2010/12/02		2010/12/02		2010/12/02		2010/12/02	
+Time	21:22:29.765625		21:22:29.765625		21:22:29.765625		21:22:29.765625	
+X_Dimension	Time		Time		Time		Time	
+X0	2.8865000000000002E+1		2.8865000000000002E+1		2.8865000000000002E+1		2.8865000000000002E+1	
+Delta_X	0.001000		0.001000		0.001000		0.001000	
+***End_of_Header***								
+X_Value	Sine with Gaussian Noise (Maximum)	X_Value	Sine with Gaussian Noise (Minimum)	X_Value	Sine with Gaussian Noise (Formula Result)	X_Value	Sine with Gaussian Noise (Formula Result) 1	Comment
+28.865000	0.315898	28.865000	-1.245778	28.865000	1.561676	28.865000	-1.206000
+
+Channels	4							
+Samples	1		1		1		1	
+Date	2010/12/02		2010/12/02		2010/12/02		2010/12/02	
+Time	21:22:29.765625		21:22:29.765625		21:22:29.765625		21:22:29.765625	
+X_Dimension	Time		Time		Time		Time	
+X0	3.3247000000000000E+1		3.3247000000000000E+1		3.3247000000000000E+1		3.3247000000000000E+1	
+Delta_X	0.001000		0.001000		0.001000		0.001000	
+***End_of_Header***								
+X_Value	Sine with Gaussian Noise (Maximum)	X_Value	Sine with Gaussian Noise (Minimum)	X_Value	Sine with Gaussian Noise (Formula Result)	X_Value	Sine with Gaussian Noise (Formula Result) 1	Comment
+33.247000	0.272654	33.247000	-1.321877	33.247000	1.594531	33.247000	-2.197000
+
+Channels	4							
+Samples	1		1		1		1	
+Date	2010/12/02		2010/12/02		2010/12/02		2010/12/02	
+Time	21:22:29.765625		21:22:29.765625		21:22:29.765625		21:22:29.765625	
+X_Dimension	Time		Time		Time		Time	
+X0	3.5346000000000004E+1		3.5346000000000004E+1		3.5346000000000004E+1		3.5346000000000004E+1	
+Delta_X	0.001000		0.001000		0.001000		0.001000	
+***End_of_Header***								
+X_Value	Sine with Gaussian Noise (Maximum)	X_Value	Sine with Gaussian Noise (Minimum)	X_Value	Sine with Gaussian Noise (Formula Result)	X_Value	Sine with Gaussian Noise (Formula Result) 1	Comment
+35.346000	0.299334	35.346000	-1.224176	35.346000	1.523510	35.346000	-1.040000
+
+Channels	4							
+Samples	1		1		1		1	
+Date	2010/12/02		2010/12/02		2010/12/02		2010/12/02	
+Time	21:22:29.765625		21:22:29.765625		21:22:29.765625		21:22:29.765625	
+X_Dimension	Time		Time		Time		Time	
+X0	3.7576000000000000E+1		3.7576000000000000E+1		3.7576000000000000E+1		3.7576000000000000E+1	
+Delta_X	0.001000		0.001000		0.001000		0.001000	
+***End_of_Header***								
+X_Value	Sine with Gaussian Noise (Maximum)	X_Value	Sine with Gaussian Noise (Minimum)	X_Value	Sine with Gaussian Noise (Formula Result)	X_Value	Sine with Gaussian Noise (Formula Result) 1	Comment
+37.576000	0.279353	37.576000	-1.226213	37.576000	1.505566	37.576000	-1.027000
+
+Channels	4							
+Samples	1		1		1		1	
+Date	2010/12/02		2010/12/02		2010/12/02		2010/12/02	
+Time	21:22:29.765625		21:22:29.765625		21:22:29.765625		21:22:29.765625	
+X_Dimension	Time		Time		Time		Time	
+X0	3.7695999999999998E+1		3.7695999999999998E+1		3.7695999999999998E+1		3.7695999999999998E+1	
+Delta_X	0.001000		0.001000		0.001000		0.001000	
+***End_of_Header***								
+X_Value	Sine with Gaussian Noise (Maximum)	X_Value	Sine with Gaussian Noise (Minimum)	X_Value	Sine with Gaussian Noise (Formula Result)	X_Value	Sine with Gaussian Noise (Formula Result) 1	Comment
+37.696000	0.000251	37.696000	-0.574009	37.696000	0.574259	37.696000	-0.052000
+
+Channels	4							
+Samples	1		1		1		1	
+Date	2010/12/02		2010/12/02		2010/12/02		2010/12/02	
+Time	21:22:29.765625		21:22:29.765625		21:22:29.765625		21:22:29.765625	
+X_Dimension	Time		Time		Time		Time	
+X0	4.1119999999999997E+1		4.1119999999999997E+1		4.1119999999999997E+1		4.1119999999999997E+1	
+Delta_X	0.001000		0.001000		0.001000		0.001000	
+***End_of_Header***								
+X_Value	Sine with Gaussian Noise (Maximum)	X_Value	Sine with Gaussian Noise (Minimum)	X_Value	Sine with Gaussian Noise (Formula Result)	X_Value	Sine with Gaussian Noise (Formula Result) 1	Comment
+41.120000	0.323730	41.120000	-0.800791	41.120000	1.124521	41.120000	-2.063000
+
+Channels	4							
+Samples	1		1		1		1	
+Date	2010/12/02		2010/12/02		2010/12/02		2010/12/02	
+Time	21:22:29.765625		21:22:29.765625		21:22:29.765625		21:22:29.765625	
+X_Dimension	Time		Time		Time		Time	
+X0	4.3984999999999999E+1		4.3984999999999999E+1		4.3984999999999999E+1		4.3984999999999999E+1	
+Delta_X	0.001000		0.001000		0.001000		0.001000	
+***End_of_Header***								
+X_Value	Sine with Gaussian Noise (Maximum)	X_Value	Sine with Gaussian Noise (Minimum)	X_Value	Sine with Gaussian Noise (Formula Result)	X_Value	Sine with Gaussian Noise (Formula Result) 1	Comment
+43.985000	0.292247	43.985000	-1.306941	43.985000	1.599189	43.985000	-1.466000
+
+Channels	4							
+Samples	1		1		1		1	
+Date	2010/12/02		2010/12/02		2010/12/02		2010/12/02	
+Time	21:22:29.765625		21:22:29.765625		21:22:29.765625		21:22:29.765625	
+X_Dimension	Time		Time		Time		Time	
+X0	4.6030000000000001E+1		4.6030000000000001E+1		4.6030000000000001E+1		4.6030000000000001E+1	
+Delta_X	0.001000		0.001000		0.001000		0.001000	
+***End_of_Header***								
+X_Value	Sine with Gaussian Noise (Maximum)	X_Value	Sine with Gaussian Noise (Minimum)	X_Value	Sine with Gaussian Noise (Formula Result)	X_Value	Sine with Gaussian Noise (Formula Result) 1	Comment
+46.030000	0.272443	46.030000	-1.240729	46.030000	1.513172	46.030000	-1.200000
+
+Channels	4							
+Samples	1		1		1		1	
+Date	2010/12/02		2010/12/02		2010/12/02		2010/12/02	
+Time	21:22:29.765625		21:22:29.765625		21:22:29.765625		21:22:29.765625	
+X_Dimension	Time		Time		Time		Time	
+X0	4.8896000000000001E+1		4.8896000000000001E+1		4.8896000000000001E+1		4.8896000000000001E+1	
+Delta_X	0.001000		0.001000		0.001000		0.001000	
+***End_of_Header***								
+X_Value	Sine with Gaussian Noise (Maximum)	X_Value	Sine with Gaussian Noise (Minimum)	X_Value	Sine with Gaussian Noise (Formula Result)	X_Value	Sine with Gaussian Noise (Formula Result) 1	Comment
+48.896000	0.284919	48.896000	-1.295309	48.896000	1.580228	48.896000	-1.443000
+

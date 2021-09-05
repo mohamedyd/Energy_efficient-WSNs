@@ -1,0 +1,9 @@
+SERVER THIS_HOST ANY 27000
+VENDOR nilm
+PACKAGE LabVIEW_AdaptiveFltr_PKG nilm 1.0000 \
+	COMPONENTS=LabVIEW_AdaptiveFltr SIGN=0AC278CAEEE2
+INCREMENT LabVIEW_AdaptiveFltr_PKG nilm 1.0000 permanent uncounted \
+	VENDOR_STRING="TEAM TBE" HOSTID=000c29a04964 \
+	vendor_info="SHOWVERSION TYPE=Toolkit LABEL=Adaptive Filter \
+	Toolkit URL=http://digital.ni.com/express.nsf/bycode/aft" \
+	TS_OK SIGN=AD9395C64F5E

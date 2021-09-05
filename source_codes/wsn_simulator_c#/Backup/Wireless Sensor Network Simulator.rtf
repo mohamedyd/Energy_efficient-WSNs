@@ -1,0 +1,85 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fswiss\fcharset0 Arial;}{\f1\fnil\fprq1\fcharset0 Franklin Gothic Medium;}}
+{\*\generator Msftedit 5.41.15.1507;}\viewkind4\uc1\pard\b\f0\fs20 Wireless Sensor Network Simulator v1.1\par
+\b0 Written by David J. Stein, Esq., March 2005\par
+================================\par
+\par
+\b Purpose\par
+\par
+\b0 This application is a simulation of a wireless sensor network. Such a network is used to detect and report certain events across an expanse of a remote area - e.g., a battlefield sensor network that detects and reports troop movements. The idea behind this network is that it can be deployed simply by scattering sensor units across the area, e.g. by dropping them out of an airplane; the sensors should automatically activate, self-configure as a wireless network with a mesh topology, and determine how to send communications packets toward a data collector (e.g., a satellite uplink.) Thus, one important feature of such a network is that collected data packets are always traveling toward the data collector, and the network can therefore be modeled as a directed graph (and every two connected nodes can be identified as "upstream" and "downstream.")\par
+\par
+A primary challenge of such a network is that all of the sensors operate on a finite energy supply, in the form of a battery. (These batteries can be rechargeable, e.g. by embedded solar panels, but the sensors still have a finite maximum power store.) Any node that loses power drops out of the communications network, and may end up partitioning the network (severing the communications link from upstream sensors toward the data collector.) Thus, the maximum useful lifetime of the network, at worst case, is the mnimum lifetime of any sensor.\par
+\par
+Much research has been devoted to maximizing this maximum lifetime. One potential improvement is in making packet-routing decisions that extend the life of the network. The concept is that any node may be connected to more than one downstream node, and it may be more desirable to use one than the other. For instance, if several nodes are connected to downstream bottleneck node that is rapidly exhausted, the lifetime can be extended by reducing the traffic going through it (i.e., upstream nodes preferentially use alternative downstream nodes.)\par
+\par
+Of course, given that data generation rates are unpredictable - since it is not known in advance whether any sensor will detect little or much activity - the routing process must be dynamic. Therefore, it is useful for each node to recalculate its routing decisions periodically, based on the energy reserves of each downstream node. An algorithm for doing so was developed by Jae-Hwan Chang and Leandros Tassiulas (\i IEEE/ACM Transactions of Networking\i0 , Vol. 12, No. 4, August 2004.)\par
+\par
+This application is a simulation of the wireless sensor network described hereinabove. The network may be deployed based on a wide range of parameters: network size (number of nodes), communications distance, energy costs for transmitting and receiving packets, etc. The network can then be used to simulate the detection of vectors traveling across the sensor network field. In this simulation, when a vector trips the sensor of a network node, the node generates a data packet and sends it to a downstream network node. The packets are routed appropriately until they reach a sensor within the "uplink zone" (the right side of the map, designated with a striped pattern.) Each node also simulates an energy store, which is depleted by sending receiving packets, and by detecting vectors. Since the nodes have finite energy, they will eventually power down and drop out of the communications network, causing network failure.\par
+\par
+The application has the ability to run successive tests on a network and report the mean network lifetime across 1,000 trials. The network routing parameters (described in the Chang and Tassiulas paper) can be tweaked to allow testing of different network configurations.\par
+\par
+\b Use\par
+\b0\par
+This simulation consists of two stages: deploying the network and running simulations.\par
+\par
+Before deploying the network, the properties of the network should be set using the configuration sliders. \b (Note:\b0  The properties of the network are set at the time the network is created, so changes to the network configuration and routing parameters will not be effective until a new network is deployed.) The network configuration properties are grouped into two categories:\par
+\par
+* Network Configuration: These factors determine the hardware properties of the network. The following variables can be configured:\par
+     - Network Size: The number of nodes in the network. If set to a high value, the network will have several hundred nodes; and since this will hugely increase the density of the network and the number of network connections, this may bog down the simulation. If a large network is desired, it is recommended to reduce the Transmission Radius.)\par
+     - Sensor Radius: The proximity range of the sensors in the network.\par
+     - Sensor Period: The delay period between sensor detection events. If set to a low value, a network sensor will fire rapidly as a vector enters its sensor radius (thereby consuming a lot of energy.) If set to a high value, the network sensor will wait a long time between firing a second packet.\par
+     - Sensor Cost: The energy cost in detecting a vector and generating a packet.\par
+     - Transmission Radius: The maximum distance within which two network nodes can communicate. If set to a high value, nodes on opposite sides of the map may be able to reach each other; if set to a low value, nodes must be very close to communicate.\par
+     - Transmitter Period: The amount of time required to send a packet. Setting this to a high value will cause each packet transmission to take several seconds. Thus, the data received at the radar will be quite stale, since many seconds will have elapsed since the triggering event. However, the high period allows the user to monitor the packet-exchange process on the network map.\par
+     - Transmit Cost: The energy cost in sending a packet. Setting this value very high will cause nodes to be depleted after sending only a few packets; setting this value very low allows the nodes to send many hundred packets. (Note that this is always scaled based on the distance between the nodes; thus, since more distant nodes can only be reached by a more powerful broadcast, such transmissions more quickly deplete the energy store of the transmitting node.)\par
+     - Receive Cost: The energy cost in receiving a packet. (This value is not scaled, as is the transmit cost.)\par
+* Routing Parameters: These factors determine the software properties of the network: essentially, the packet-routing method to be used. If routing is set to "Random," each node selects a downstream connection randomly for each packet. If set to "Directed," the network routes packets based on the algorithm described in the Chang and Taissulas article. The directed routing parameters (Exchange Cost, Residual Energy, Initial Energy, and Routing Period) are best understood by reviewing the details of that article.\par
+\par
+When the network parameters are set, the network can be deployed by clicking the "Deploy Network" button. The nodes of the network will be randomly scattered and connected, as shown on the main map. The communications of the network are directed from left to right, and nodes in the "uplink zone" (the striped zone at the right side of the map) are presumed to be in direct contact with the data collector. An alternative random scattering of nodes may be created by clicking the "Deploy Network" button again.\par
+\par
+Once the network has been deployed, the simulation may be run by clicking "Start Simulation." The map will show vectors moving through the field and triggering sensors. The sensors may run out of power and drop out of the network, and eventually, all nodes will be powered down. The progress of the network can be monitored via the "Simulation Status" box. A new simulation may be run by stopping and restarting the simulation. Alternatively, the previous simulation may be reviewed by clicking the "Replay Simulation" button.\par
+\par
+\b Display\b0\par
+\par
+The network is displayed on the main map as a series of red circles surrounded by gray circles. The red circle represents the sensor/node, and The gray area surrouding the node is the sensor detection range; any vector (the moving green rectangles) that enters this area will trigger the sensor. When this occurs, the gray area will turn a bluish color and gradually fade back to gray (the speed of this fading depends on the sensor delay period - see above.)\par
+\par
+Each node is connected to nearby nodes by black lines, which represent communications links. If directed routing is in use, the connection that a node has currently selected is colored blue. When a packet is being exchanged on this connection, it will appear as red. This will likely not be visible unless the transmitter period is set to a rather high value; the lower values, which better reflect reality, cause packets to be transmitted so rapidly that the line will appear red only for a very brief time.\par
+\par
+The color in the center of the red circle represents the battery status of the node, which gradually shifts from white (full power) to black (no power.) When a node loses all power, three changes occur: the node is no longer circled in red, but is totally black; the gray sensor area shrinks and disappears; and all of the communications links vanish.\par
+\par
+The radar at the bottom of the screen shows the results of the data transfer. Here, the nodes are shown as green circles, and the vectors are shown as small, white rectangles. If a packet successfully reaches a node in the uplink zone of the network, it is transferred to the radar and displayed as a hit by coloring the circle a bright green. Thus, the speed and accuracy of the network may be viewed, as they pertain to the vectors passing through the field.\par
+\par
+\b Programming\b0\par
+\par
+This simulator was written in C# using Microsoft Visual Studio.NET 2003, which the author finds to be an excellent programming platform.\par
+\par
+The application is written in two parts: one module represents the wireless sensor network, and the other is the simulator that hosts the wireless sensor network objects. The classes that comprise the wireless sensor network are as follows:\par
+\par
+* WirelessSensor: This class represents a single sensor. The class contains many basic and straightforward parameters, such as iSensorRadius (the radius, in pixels, of sensitivity of the sensor), iSensorDelay (set to zero if the sensor is ready for detection, or positive if the sensor has recently detected a vector and is momentarily desensitized.), and x and y (integers representing the position of the node on the map.) Noteworthy member variables include:\par
+    * aPackets: an ArrayList of Packet objects, each representing a datagram to be forwarded to one of the downstream connections.\par
+    * aConnections: an ArrayList of WirelessSensorConnections representing connections to downstream nodes.\par
+    * connectionCurrent: if directed routing is in use, the currently selected downstream node.\par
+    * iResidualEnergy: the amount of battery power remaining in the sensor and node; the sensor is disabled when this falls to or below 0.\par
+\par
+* WirelessSensorConnection: This class represents a connection between two network nodes, internally designated as sSender and sReceiver. The connection contains a placeholder for the packet being exchanged, as well as a timer to simulate a non-instantaneous exchange period. These objects fit into the simulation as members of the aConnections list (always hosted by the upstream node.)\par
+\par
+* Packet: This class represents the datagram exchanged between nodes. It simply contains variables x, y, lifetime (the maximum amount of time that the sensor will appear on the radar), and timestamp (the amount of time left until the packet expires on the radar.)\par
+\par
+* WirelessSensorNetwork: This class represents the entire network. In addition to many parameters that correspond to the sliders in the simulator (Receiver Cost, Sensor Cost, Sensor Delay, etc.) and some data synchronization variables, this class contains two important ArrayLists: aSensors, which holds all of the WirelessSensor objects, and aRadar, which holds all of the packets that have been transmitted out of the network and are appearing on the radar.\par
+\par
+* VectorList and Vector: The VectorList class contains a list of Vector objects, each of which represents an object moving across the map and being detected by the network sensors.\par
+\par
+The interface class is a typical Windows .NET event-driven interface. Only two aspects of this system are noteworthy:\par
+     * The actual network simulation runs on a separate thread from the thread controlling the user interface. This simulator supports completely gigantic networks - 400 nodes x 400 nodes, which, fully interconnected (maximum network transmission radius), include 160,000 network connections. Simulating transmissions across all of these connections, and then drawing the whole network several times per second, requires a nontrivial deal of processing. The CPU of a typical 3.2GHz machine simply can't juggle this task with the message pump that handles window events; hence, cramming both functions into one thread results in a completely unresponsive simulator window. Instead, the simulation thread is started in a separate thread, which runs continuously until the user stops it (by clicking Stop) or closes the window; as a result, the window remains responsive during the simulation.\par
+     * Isolating the drawing and simulation functions to separate threads creates a synchronization problem: If the main thread is tracing the ArrayList of vectors at the same time that the processing thread updates the list (by inserting or, worse, removing an item), there exists the likelihood of an exception. To preclude this occurrence, the threads synchronize access to the vector list by using a mutex.\par
+\par
+\b About\b0\par
+\par
+This application was written in the context of a graduate-level seminar class hosted by Professor Toshinori Munakata at Cleveland State University in Spring, 2005. The author is a patent attorney with a strong interest in software, and with a sufficiently solid background in C# to have written this application in the span of a few hours.\par
+\par
+Please direct questions and comments to David Stein, Esq. at djs10@cwru.edu. \f1 (Using the phrase "Wireless network simulator" in the subject line of such messages will help ensure delivery of your message.)\par
+\f0\par
+\par
+\i Wireless Sensor Network Simulator v1.0 (and all future versions), together with all accompanying source code and documentation, is copyright (c) David J. Stein, Esq., March 2005. All rights reserved except as set forth in the included Wireless Sensor Network License Agreement.\i0\par
+\par
+}
+ 

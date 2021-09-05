@@ -1,0 +1,23 @@
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wireless Sensor Network Simulator", "Wireless Sensor Network Simulator.csproj", "{6E7E3167-F6B2-47B8-A31B-73E511D950ED}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Wireless Sensor Network Simulator Setup", "Wireless Sensor Network Setup\Wireless Sensor Network Setup.vdproj", "{3C8776AC-EA93-4824-8180-BAA1487E8B09}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6E7E3167-F6B2-47B8-A31B-73E511D950ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E7E3167-F6B2-47B8-A31B-73E511D950ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E7E3167-F6B2-47B8-A31B-73E511D950ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E7E3167-F6B2-47B8-A31B-73E511D950ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C8776AC-EA93-4824-8180-BAA1487E8B09}.Debug|Any CPU.ActiveCfg = Debug
+		{3C8776AC-EA93-4824-8180-BAA1487E8B09}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
